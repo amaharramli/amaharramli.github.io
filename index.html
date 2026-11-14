@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060b09">
+  <title>Wall OS v1.09 | Ali Maharramli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/boot.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/windows.css">
+</head>
+<body>
+  <div id="cursor-glow"></div>
+  <canvas id="binary-bg-canvas" aria-hidden="true"></canvas>
+  <div id="scroll-progress" aria-hidden="true"></div>
+  <section id="boot-screen" class="screen">
+    <div class="boot-panel">
+      <div class="boot-logo">WALL<span>OS</span></div>
+      <div id="diagnostics" class="diagnostics" aria-live="polite"></div>
+      <div class="boot-progress"><span></span></div>
+      <div class="boot-label">INITIALIZING PHOSPHOR INTERFACE...</div>
+    </div>
+  </section>
+  <section id="challenge-screen" class="screen hidden">
+    <div class="challenge-card">
+      <button id="challenge-close" class="challenge-close" aria-label="Close Firewall Bypass">[ × ]</button>
+      <div class="challenge-kicker">WALLOS SECURITY SUBSYSTEM</div>
+      <h1>FIREWALL BYPASS <span>// SECURITY CHALLENGE</span></h1>
+      <p>Lock all four frequency bars inside the green target zone before the firewall timer expires.</p>
+      <div class="cipher-bars">
+        <div class="cipher-row"><span>FREQ_01</span><div class="cipher-track"><i></i><b></b></div></div>
+        <div class="cipher-row"><span>FREQ_02</span><div class="cipher-track"><i></i><b></b></div></div>
+        <div class="cipher-row"><span>FREQ_03</span><div class="cipher-track"><i></i><b></b></div></div>
+        <div class="cipher-row"><span>FREQ_04</span><div class="cipher-track"><i></i><b></b></div></div>
+      </div>
+      <div class="challenge-meta"><span id="challenge-timer">TIME REMAINING: 15.0s</span><span id="challenge-status">SIGNAL SEARCHING...</span></div>
+      <button id="bypass-button" class="bypass-button">[ BYPASS ]</button>
+      <div id="root-unlock" class="root-unlock hidden"><strong>ACCESS GRANTED // ROOT SHELL UNLOCKED</strong><div class="root-actions"><button id="claim-root-flag" class="retro-button">[ Claim Root Flag ]</button><button id="return-to-portfolio" class="retro-button">[ Return to Portfolio ]</button></div><pre id="root-flag" hidden></pre></div>
+    </div>
+  </section>
+  <canvas id="binary-rain" class="binary-rain hidden"></canvas>
+  <div id="access-overlay" class="access-overlay hidden">ACCESS GRANTED<span>WALL OS SECURITY LAYER CLEARED</span></div>
+  <section id="login-screen" class="screen hidden">
+    <div class="login-card">
+      <div class="login-brand">WALL OS <small>v1.09</small></div>
+      <img class="avatar" src="assets/images/profile.jpg" alt="Ali Maharramli">
+      <div class="login-user">Ali Maharramli</div>
+      <div class="login-role">BSc in Information Technology @ ADA University • Cybersecurity Red Team</div>
+      <button id="login-button" class="primary-button">ENTER PORTFOLIO</button>
+      <div class="login-hint">Press ENTER to access the system</div>
+    </div>
+  </section>
+  <main id="desktop" class="hidden">
+    <header class="status-bar">
+      <nav class="top-nav" aria-label="Portfolio navigation">
+        <button data-app="home">Home</button><button data-app="about">About</button><button data-app="projects">Projects</button><button data-app="skills">Skills</button><button data-app="terminal">Terminal</button><button data-app="contact">Contact</button><button id="command-pill">Search / Ctrl+K</button>
+      </nav>
+      <div class="status-brand">WALL OS <span>v1.09</span></div>
+      <div class="status-readout"><span id="clock">00:00</span><span id="ram">MEM: 15%</span><div class="theme-switcher" aria-label="Phosphor theme"><button data-theme="mint" title="Electric Mint"></button><button data-theme="amber" title="Amber Phosphor"></button><button data-theme="cyan" title="Cyber Cyan"></button></div><button id="sound-toggle" title="Toggle sound">♫ ON</button></div>
+    </header>
+    <main id="portfolio-sections">
+      <section id="home" class="page-section hero-section"></section>
+      <section id="about" class="page-section"></section>
+      <section id="projects" class="page-section"></section>
+      <section id="skills" class="page-section"></section>
+      <section id="contact" class="page-section"></section>
+    </main>
+    <div id="window-layer"></div>
+    <div id="toast-stack" aria-live="polite"></div>
+    <div id="confetti-layer"></div>
+    <footer class="taskbar">
+      <button id="start-button" class="start-button">▣ START</button>
+      <div id="task-buttons" class="task-buttons"></div>
+      <a class="github-link" href="https://github.com/amaharramli" target="_blank" rel="noopener">◈ GITHUB</a>
+    </footer>
+    <aside id="start-menu" class="start-menu hidden">
+      <div class="menu-heading">WALL OS <span>v1.09</span></div>
+      <div class="menu-apps">
+        <button data-app="home">⌂ Home</button><button data-app="about">◉ About Me</button><button data-app="projects">▤ Project Archive</button>
+        <button data-app="skills">▥ Skills Database</button><button data-app="contact">✉ Contact Terminal</button>
+        <button data-app="terminal">&gt;_ System Terminal</button><button data-app="achievements">★ Achievements</button>
+      </div>
+      <details class="utilities-menu"><summary>UTILITIES &amp; GAMES</summary><button data-app="media">▶ Media Player</button><button data-app="snake">⌁ Snake</button><button data-app="minesweeper">✣ Minesweeper</button><button data-app="firewall">⌁ Firewall Bypass</button><button data-app="cipher">⌁ Cipher &amp; Encoder Lab</button></details>
+      <button id="binary-toggle" class="menu-toggle">Binary Rain: ON</button>
+      <label class="style-select">WINDOW STYLE
+        <select id="window-style"><option value="classic">Classic bevel</option><option value="rounded">Cyber rounded</option><option value="chamfer">Octagonal chamfer</option></select>
+      </label>
+      <button id="shutdown-button" class="shutdown">⏻ LOG OFF / SHUT DOWN</button>
+    </aside>
+    <section id="command-palette" class="command-palette hidden" role="dialog" aria-modal="true" aria-labelledby="command-title">
+      <div class="command-box"><div class="command-head"><span id="command-title">QUICK COMMAND</span><button id="command-close">×</button></div><input id="command-input" placeholder="Jump to a section or launch a utility..." autocomplete="off"><div id="command-results"></div></div>
+    </section>
+    <footer id="portfolio-footer">
+      <div><strong>ALI MAHARRAMLI</strong><span>© 2026 Ali Maharramli • Built with Vanilla HTML5, CSS3 &amp; ES6+</span></div>
+      <nav aria-label="Footer navigation"><button data-app="home">Home</button><button data-app="about">About</button><button data-app="projects">Projects</button><button data-app="skills">Skills</button><button data-app="contact">Contact</button></nav>
+      <button id="resume-button" class="retro-button">VIEW EXECUTIVE RESUME</button>
+      <a href="https://github.com/amaharramli" target="_blank" rel="noopener">VIEW GITHUB REPOSITORY ↗</a>
+    </footer>
+  </main>
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/confetti.js"></script>
+  <script src="js/windows.js"></script>
+  <script src="js/applications.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/minesweeper.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
